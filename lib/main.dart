@@ -1,6 +1,9 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
 import 'package:flutter/material.dart';
+import 'package:ven_das/views/ClientPage.dart';
+import 'package:ven_das/views/OrderPage.dart';
+import 'package:ven_das/views/ProductPage.dart';
 
 import 'views/NewPageScreen.dart';
 
@@ -34,11 +37,7 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   int _indiceAtual = 0;
 
-  final List<Widget> _telas = [
-    NewPageScreen("Cliente"),
-    NewPageScreen("Produto"),
-    NewPageScreen("Pedidos")
-  ];
+  final List<Widget> _telas = [ClientPage(), ProductPage(), OrderPage()];
 
   @override
   Widget build(BuildContext context) {
@@ -54,11 +53,18 @@ class _MyHomePageState extends State<MyHomePage> {
           BottomNavigationBarItem(
             icon: Icon(Icons.person),
             label: 'Cliente',
+            backgroundColor: Colors.blue,
           ),
           BottomNavigationBarItem(
-              icon: Icon(Icons.storefront), label: 'Produto'),
+            icon: Icon(Icons.storefront),
+            label: 'Produto',
+            backgroundColor: Colors.green,
+          ),
           BottomNavigationBarItem(
-              icon: Icon(Icons.shopping_basket), label: 'Pedidos'),
+            icon: Icon(Icons.shopping_basket),
+            label: 'Pedidos',
+            backgroundColor: Colors.red,
+          ),
         ],
       ), // T
     );
