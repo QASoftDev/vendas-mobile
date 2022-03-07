@@ -31,11 +31,34 @@ class _OrderPageState extends State<OrderPage> {
               return ListView.builder(
                 itemCount: snapshot.data!.length,
                 itemBuilder: (context, index) {
-                  return ListTile(
-                    title: Text(snapshot.data![index]['id']),
-                    subtitle: Text(snapshot.data![index]['date']),
-                    trailing: Text(snapshot.data![index]['client']),
+                  var products = snapshot.data;
+
+                  return Container(
+                    child: Row(
+                      children: <Widget>[
+                        Card(
+                          child: Column(
+                            children: <Widget>[
+                              Text(snapshot.data![index].id.toString()),
+                              Text(snapshot.data![index].date.toString()),
+                              Text(
+                                  '${snapshot.data![index].client.name.toString()} ${snapshot.data![index].client.lastname.toString()} '),
+                            ],
+                          ),
+                        )
+                      ],
+                    ),
                   );
+
+                  //Text(snapshot.data![index].id.toString()),
+                  // ListTile(
+                  //   title: Text(snapshot.data![index].id.toString()),
+                  //   subtitle: Text(snapshot.data![index].date.toString()),
+                  // ),
+                  // ListTile(
+                  //   title: Text(
+                  //       snapshot.data![index].itens[index].qtdade.toString()),
+                  // )
                 },
               );
             }
@@ -55,7 +78,6 @@ class _OrderPageState extends State<OrderPage> {
 
       listTemp = await repository.findAll();
     } catch (exception) {
-      print(exception);
       showError(
           context, "Erro ao obter a lista de pedidos", exception.toString());
     }

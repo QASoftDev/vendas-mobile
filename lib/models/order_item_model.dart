@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 class OrderItem {
-  String? id;
+  int? id;
   int? qtdade;
 
   OrderItem({
