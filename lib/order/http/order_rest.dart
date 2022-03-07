@@ -1,8 +1,7 @@
 import 'dart:convert';
-
 import 'package:ven_das/api.dart';
-import 'package:ven_das/models/order_model.dart';
 import 'package:http/http.dart' as http;
+import 'package:ven_das/models/order_model.dart';
 
 class OrderRest {
   Future<OrderModel> find(int id) async {
@@ -17,18 +16,26 @@ class OrderRest {
   }
 
   Future<List<OrderModel>> findAll() async {
+    List<OrderModel> orderModel = [];
     final http.Response response =
-        await http.get(Uri.http(API.endpoint, '/orders'));
+        await http.get(Uri.http(API.endpoint, 'orders'));
     if (response.statusCode == 200) {
-      return OrderModel.fromJsonList(json.decode(response.body));
+      var json = response.body;
+
+      print(json);
+      return orderModelFromJson(json);
+
+      //return orderModel = OrderModel.fromJson(jsonMap) as List<OrderModel>;
+
+      //return OrderModel.fromJsonList(json.decode(response.body));
     } else {
-      throw Exception('Erro ao buscar todas os pedidos.');
+      throw Exception('Erro ao buscar todos os pedidos.');
     }
   }
 
   Future<OrderModel> create(OrderModel order) async {
     final http.Response response =
-        await http.post(Uri.http(API.endpoint, '/orders'),
+        await http.post(Uri.http(API.endpoint, 'orders'),
             headers: <String, String>{
               'Content-Type': 'application/json; charset=UTF-8',
             },
@@ -42,7 +49,7 @@ class OrderRest {
 
   Future<OrderModel> update(OrderModel order) async {
     final http.Response response =
-        await http.put(Uri.http(API.endpoint, '/orders'),
+        await http.put(Uri.http(API.endpoint, 'orders/${order.id}'),
             headers: <String, String>{
               'Content-Type': 'application/json; charset=UTF-8',
             },
@@ -56,14 +63,14 @@ class OrderRest {
 
   Future<OrderModel> delete(int id) async {
     final http.Response response = await http.delete(
-        Uri.http(API.endpoint, '/orders/${id}'),
+        Uri.http(API.endpoint, 'orders/${id}'),
         headers: <String, String>{
           'Content-Type': 'application/json; charset=UTF-8',
         });
     if (response.statusCode == 200) {
       return OrderModel.fromJson(json.decode(response.body));
     } else {
-      throw Exception('Erro ao remover o  pedido: ${id} .');
+      throw Exception('Erro ao remover o pedido: ${id} .');
     }
   }
 }

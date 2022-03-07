@@ -5,8 +5,6 @@ import 'package:ven_das/views/ClientPage.dart';
 import 'package:ven_das/views/OrderPage.dart';
 import 'package:ven_das/views/ProductPage.dart';
 
-import 'views/NewPageScreen.dart';
-
 void main() {
   runApp(const MyApp());
 }

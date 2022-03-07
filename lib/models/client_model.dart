@@ -1,5 +1,13 @@
+import 'dart:convert';
+
+List<ClientModel> clientModelFromJson(String str) => List<ClientModel>.from(
+    json.decode(str).map((x) => ClientModel.fromJson(x)));
+
+String clientModelToJson(List<ClientModel> data) =>
+    json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
+
 class ClientModel {
-  String? id;
+  int? id;
   String? cpf;
   String? name;
   String? lastname;
@@ -11,19 +19,17 @@ class ClientModel {
     this.lastname,
   });
 
-  ClientModel.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
-    cpf = json['cpf'];
-    name = json['name'];
-    lastname = json['lastname'];
-  }
+  factory ClientModel.fromJson(Map<String, dynamic> json) => ClientModel(
+        id: json["id"],
+        cpf: json["cpf"],
+        name: json["name"],
+        lastname: json["lastname"],
+      );
 
-  Map<String, dynamic> toJson() {
-    return {
-      'id': id,
-      'cpf': cpf,
-      'name': name,
-      'lastname': lastname,
-    };
-  }
+  Map<String, dynamic> toJson() => {
+        "id": id,
+        "cpf": cpf,
+        "name": name,
+        "lastname": lastname,
+      };
 }
