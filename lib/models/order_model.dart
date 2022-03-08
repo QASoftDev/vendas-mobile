@@ -1,5 +1,9 @@
 import 'dart:convert';
 
+import 'package:ven_das/models/client_model.dart';
+
+import 'item_model.dart';
+
 List<OrderModel> orderModelFromJson(String str) =>
     List<OrderModel>.from(json.decode(str).map((x) => OrderModel.fromJson(x)));
 
@@ -10,7 +14,7 @@ class OrderModel {
   int? id;
   String? date;
   List<Item>? items;
-  Client? client;
+  ClientModel? client;
 
   OrderModel({
     this.id,
@@ -23,7 +27,7 @@ class OrderModel {
         id: json["id"],
         date: json["date"],
         items: List<Item>.from(json["items"].map((x) => Item.fromJson(x))),
-        client: Client.fromJson(json["client"]),
+        client: ClientModel.fromJson(json["client"]),
       );
 
   Map<String, dynamic> toJson() => {
@@ -34,70 +38,70 @@ class OrderModel {
       };
 }
 
-class Client {
-  int? id;
-  String? cpf;
-  String? name;
-  String? lastname;
+// class Client {
+//   int? id;
+//   String? cpf;
+//   String? name;
+//   String? lastname;
 
-  Client({
-    this.id,
-    this.cpf,
-    this.name,
-    this.lastname,
-  });
+//   Client({
+//     this.id,
+//     this.cpf,
+//     this.name,
+//     this.lastname,
+//   });
 
-  factory Client.fromJson(Map<String, dynamic> json) => Client(
-        id: json["id"],
-        cpf: json["cpf"],
-        name: json["name"],
-        lastname: json["lastname"],
-      );
+//   factory Client.fromJson(Map<String, dynamic> json) => Client(
+//         id: json["id"],
+//         cpf: json["cpf"],
+//         name: json["name"],
+//         lastname: json["lastname"],
+//       );
 
-  Map<String, dynamic> toJson() => {
-        "id": id,
-        "cpf": cpf,
-        "name": name,
-        "lastname": lastname,
-      };
-}
+//   Map<String, dynamic> toJson() => {
+//         "id": id,
+//         "cpf": cpf,
+//         "name": name,
+//         "lastname": lastname,
+//       };
+// }
 
-class Item {
-  int? qtdade;
-  Product? product;
+// class Item {
+//   int? qtdade;
+//   Product? product;
 
-  Item({
-    this.qtdade,
-    this.product,
-  });
+//   Item({
+//     this.qtdade,
+//     this.product,
+//   });
 
-  factory Item.fromJson(Map<String, dynamic> json) => Item(
-        qtdade: json["qtdade"],
-        product: Product.fromJson(json["product"]),
-      );
+//   factory Item.fromJson(Map<String, dynamic> json) => Item(
+//         qtdade: json["qtdade"],
+//         product: Product.fromJson(json["product"]),
+//       );
 
-  Map<String, dynamic> toJson() => {
-        "qtdade": qtdade,
-        "product": product!.toJson(),
-      };
-}
+//   Map<String, dynamic> toJson() => {
+//         "qtdade": qtdade,
+//         "product": product!.toJson(),
+//       };
+// }
 
-class Product {
-  int? id;
-  String? description;
+// class Product {
+//   int? id;
+//   String? description;
 
-  Product({
-    this.id,
-    this.description,
-  });
+//   Product({
+//     this.id,
+//     this.description,
+//   });
 
-  factory Product.fromJson(Map<String, dynamic> json) => Product(
-        id: json["id"],
-        description: json["description"],
-      );
+//   factory Product.fromJson(Map<String, dynamic> json) => Product(
+//         id: json["id"],
+//         description: json["description"],
+//       );
 
-  Map<String, dynamic> toJson() => {
-        "id": id,
-        "description": description,
-      };
-}
+//   Map<String, dynamic> toJson() => {
+//         "id": id,
+//         "description": description,
+//       };
+// }
