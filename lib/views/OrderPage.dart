@@ -29,25 +29,50 @@ class _OrderPageState extends State<OrderPage> {
 
             if (snapshot.hasData) {
               return ListView.builder(
+                shrinkWrap: true,
                 itemCount: snapshot.data!.length,
                 itemBuilder: (context, index) {
                   var products = snapshot.data;
 
                   return Container(
-                    child: Row(
-                      children: <Widget>[
-                        Card(
-                          child: Column(
-                            children: <Widget>[
-                              Text(snapshot.data![index].id.toString()),
-                              Text(snapshot.data![index].date.toString()),
-                              Text(
-                                  '${snapshot.data![index].client.name.toString()} ${snapshot.data![index].client.lastname.toString()} '),
-                            ],
-                          ),
-                        )
-                      ],
-                    ),
+                    child: Column(children: <Widget>[
+                      Card(
+                        child: Column(
+                          children: <Widget>[
+                            Row(
+                              children: <Widget>[
+                                Text(snapshot.data![index].id.toString()),
+                                Text(snapshot.data![index].date.toString()),
+                                Text(
+                                    '${snapshot.data![index].client.name.toString()} ${snapshot.data![index].client.lastname.toString()} '),
+
+                                // ListView.builder(
+                                //   itemCount: snapshot.data![index].items.length,
+                                //   itemBuilder: (context1, index1) {
+                                //     return Text(
+                                //         '${snapshot.data![index].items[index1].product.toString()} ');
+                                //   },
+                                // )
+                              ],
+                            ),
+                            SizedBox(
+                                height: 250,
+                                child: ListView.builder(
+                                  shrinkWrap: true,
+                                  itemCount: snapshot.data![index].items.length,
+                                  itemBuilder: (context, index1) {
+                                    return Column(children: <Widget>[
+                                      Text(
+                                          '${snapshot.data![index].items[index1].qtdade.toString()}'),
+                                      Text(
+                                          '${snapshot.data![index].items[index1].product.description.toString()}'),
+                                    ]);
+                                  },
+                                )),
+                          ],
+                        ),
+                      )
+                    ]),
                   );
 
                   //Text(snapshot.data![index].id.toString()),
